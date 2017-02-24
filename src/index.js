@@ -39,9 +39,17 @@ app.ports.sendMessage.subscribe((value) => {
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    app.ports.listenLogin.send(user.displayName);
+    return firebase
+      .database()
+      .ref(`users/${firebase.auth().currentUser.uid}`)
+      .once('value')
+      .then(snapshot => {
+        const userSnap = snapshot.val();
+
+        app.ports.listenLogin.send(userSnap);
+      });
   } else {
-    app.ports.listenLogin.send(false);
+    app.ports.listenLogin.send(null);
   }
 });
 
@@ -52,7 +60,6 @@ function mapUserToMessage(currentMessage) {
     .once('value')
     .then(snapshot => {
       const userSnap = snapshot.val();
-
       currentMessage.name = userSnap.name;
 
       return currentMessage;
@@ -72,7 +79,6 @@ messagesRef.on('value', (snapshot) => {
       .map(mapUserToMessage)
   )
     .then((messages) => {
-      console.log(messages)
       app.ports.listMessages.send(messages);
     })
 });
