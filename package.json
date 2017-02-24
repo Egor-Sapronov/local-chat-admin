@@ -1,0 +1,19 @@
+{
+  "name": "local-chat-admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 3000",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elm-webpack-loader": "^4.2.0",
+    "file-loader": "^0.10.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.3.0"
+  }
+}
