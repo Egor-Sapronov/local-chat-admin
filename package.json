@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "elm-format": "^0.5.2",
     "elm-webpack-loader": "^4.2.0",
     "file-loader": "^0.10.0",
     "webpack": "^2.2.1",
